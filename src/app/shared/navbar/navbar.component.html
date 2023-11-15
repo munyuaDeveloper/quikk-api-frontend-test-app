@@ -1,0 +1,26 @@
+<div class="toolbar" role="banner">
+    <img width="100" alt="Angular Logo" routerLink="/" class="logo"
+        src="assets/img/logo.png" />
+    <div class="spacer"></div>
+    <div *ngIf="!authService.isLoggedIn()">
+        <a class="text-white pe-2">
+            <i class="fa fa-sign-in-alt"></i>
+            Sign In
+        </a>
+        <a class="text-white pe-3">
+            <i class="fa fa-sign-in-alt"></i>
+            Sign Up
+        </a>
+    </div>
+    <div *ngIf="authService.isLoggedIn()">
+        <a class="text-white pe-2" [routerLink]="['/dashboard']" routerLinkActive="active" >
+            <i class="fa fa-user"></i>
+            My Account
+        </a>
+        <a class="text-white pe-3" (click)="logout()">
+            <i class="fa fa-power-off"></i>
+            Logout
+        </a>
+    </div>
+
+</div>

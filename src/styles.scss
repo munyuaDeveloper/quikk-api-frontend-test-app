@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'ngx-toastr/toastr';
+*{
+    margin: 0;
+    padding: 0;
+}
+.btn-primary{
+    background-color: #28DF99 !important;
+    border: none;
+    
+}
+a{
+    color: #28DF99;
+    text-decoration: none;
+    cursor: pointer;
+}
+a:hover {
+    color: #F6F7D4 !important;
+}
+.card{
+    border: none;
+}
+.text-primary{
+    color: #28DF99 !important; 
+}

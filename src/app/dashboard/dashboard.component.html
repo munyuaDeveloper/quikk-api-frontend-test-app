@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+
+<div class="content-wrapper">
+    <div class="card shadow" style="width: 100%;">
+        <div class="card-body p-0 py-2">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="assets/img/user.jpg">
+                    </div>
+                    <div class="col-8 account-details">
+                        <p class="name text-uppercase">{{profileDetails?.first_name}} {{profileDetails?.last_name}}</p>
+                        <p>{{profileDetails?.email}}</p>
+                        <p>{{profileDetails?.phone_number}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mt-5 balance-card" style="width: 100%;">
+        <div class="card-body p-0 py-2">
+            <h5 class="text-uppercase">Your Balance</h5>
+            <h1 class="amount" *ngIf="(accountBalance$ |async) as wallet">{{wallet?.balance | currency: 'KSH ' }}</h1>
+        </div>
+    </div>
+
+    <div class="table-responsive mt-3">
+        <h5 class="text-primary text-center">Recent transactions</h5>
+        <div style="display: block; height: 200px; overflow-y: scroll">
+                 <table class="table mb-0" >
+            <tbody >
+                <tr *ngFor="let transaction of (myRecentTransactions$ | async); let i =index;">
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{transaction?.amount | currency: 'Ksh '}}</td>
+                    <td>To {{transaction?.receiver_wallet?.phone_number}}</td>
+                    <td>{{transaction?.createdAt | date: 'mediumDate'}}</td>
+                </tr>
+                <p class="text-center mt-3" *ngIf="(myRecentTransactions$ | async)?.length === 0">No recent transactions</p>
+            </tbody>
+        </table>
+        </div>
+   
+    </div>
+
+    <div class="footer-action-buttons position-absolute bottom-0 start-50 translate-middle-x mb-5">
+        <button type="button" class="btn btn-primary" (click)="openModalComponent('TOP_UP')">Top Up</button>
+        <button type="button" class="btn btn-primary" (click)="openModalComponent('SEND_MONEY')">Send Money</button>
+
+    </div>
+</div>
