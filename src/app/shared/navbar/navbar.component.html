@@ -3,11 +3,11 @@
         src="assets/img/logo.png" />
     <div class="spacer"></div>
     <div *ngIf="!authService.isLoggedIn()">
-        <a class="text-white pe-2">
+        <a class="text-white pe-2" (click)="setAuthAction('signIn')">
             <i class="fa fa-sign-in-alt"></i>
             Sign In
         </a>
-        <a class="text-white pe-3">
+        <a class="text-white pe-3" (click)="setAuthAction('signUp')">
             <i class="fa fa-sign-in-alt"></i>
             Sign Up
         </a>

@@ -4,7 +4,7 @@ import { NavbarComponent } from "../shared/navbar/navbar.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from '../shared/services/shared.service';
-import { take, tap } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
 import { MessageService } from '../shared/services/message.service';
 
@@ -18,13 +18,16 @@ import { MessageService } from '../shared/services/message.service';
 export class HomeComponent {
     loginForm!: FormGroup;
     registrationForm!: FormGroup;
-    showLogin = true;
+    showLogin = 'signIn'
 
     constructor(private router: Router,
         private sharedService: SharedService,
         private authService: AuthService,
         private messageService: MessageService,
-        private fb: FormBuilder) { }
+        private fb: FormBuilder) {
+
+        this.sharedService.getAuthAction().subscribe(res => this.showLogin = res)
+    }
 
     ngOnInit(): void {
         this.loginForm = this.fb.group({

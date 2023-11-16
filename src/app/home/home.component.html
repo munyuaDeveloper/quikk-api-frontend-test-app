@@ -12,7 +12,7 @@
           omnis deserunt veritatis nobis?</p>
         <button type="button" class="btn btn-outline-primary shadow-lg text-black text-uppercase">Explore More</button>
       </div>
-      <div class="col-sm-4 pe-md-5" *ngIf="showLogin">
+      <div class="col-sm-4 pe-md-5" *ngIf="showLogin === 'signIn'; else signUp">
         <div class="card" style="width: 100%; border: none;">
           <div class="card-body">
             <h4 class="card-title">Welcome Back!</h4>
@@ -27,13 +27,14 @@
               </div>
               <button (click)="login()" [disabled]="loginForm.invalid" class="btn btn-primary w-100">Sign In</button>
             </form>
-            <p class="pt-2">You don't have an account? <a (click)="showLogin = false" class="text-primary">Create
+            <p class="pt-2">You don't have an account? <a (click)="showLogin = 'signUp'" class="text-primary">Create
                 here.</a></p>
           </div>
         </div>
 
       </div>
-      <div class="col-sm-4 pe-md-5" *ngIf="!showLogin">
+      <ng-template #signUp>
+      <div class="col-sm-4 pe-md-5">
         <div class="card" style="width: 100%; border: none;">
           <div class="card-body">
             <h4 class="card-title">Create Account</h4>
@@ -61,12 +62,14 @@
               <button (click)="register()" [disabled]="registrationForm.invalid" class="btn btn-primary w-100">Create an
                 Account</button>
             </form>
-            <p class="pt-2">You don't have an account? <a (click)="showLogin = true" class="text-primary">Create
-                here.</a></p>
+            <p class="pt-2">You have an account? <a (click)="showLogin = 'signIn'" class="text-primary">Sign In</a></p>
           </div>
         </div>
 
       </div>
+      </ng-template>
+      
+
     </div>
   </div>
 </div>

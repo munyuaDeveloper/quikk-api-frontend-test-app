@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 export class NavbarComponent {
 
   constructor(public authService: AuthService,
+    private sharedService: SharedService,
     private router: Router) {
 
   }
@@ -20,5 +22,9 @@ export class NavbarComponent {
   logout() {
     this.authService.logoutUser();
     this.router.navigate(['/'])
+  }
+
+  setAuthAction(action: string) {
+    this.sharedService.setAuthAction(action)
   }
 }
