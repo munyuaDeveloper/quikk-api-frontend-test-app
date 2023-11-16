@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="card shadow mt-5 mt-sm-0 balance-card" style="width: 100%;">
+                <div class="card shadow mt-4 mt-sm-0 balance-card" style="width: 100%;">
                     <div class="card-body p-0 py-2">
                         <p class="balance text-uppercase">Your Balance</p>
                         <h1 class="amount" *ngIf="(accountBalance$ |async) as wallet">{{wallet?.balance | currency: 'KSH
@@ -35,21 +35,57 @@
         </div>
     </div>
 
-    <div class="table-responsive mt-3">
+    <div class="mt-4">
         <h5 class="text-primary text-end">Recent transactions</h5>
         <div class="table-container">
-            <table class="table mb-0">
-                <tbody>
-                    <tr *ngFor="let transaction of (myRecentTransactions$ | async); let i =index;">
-                        <th scope="row">{{i + 1}}</th>
-                        <td>{{transaction?.amount | currency: 'Ksh '}}</td>
-                        <td>To {{transaction?.receiver_wallet?.phone_number}}</td>
-                        <td>{{transaction?.createdAt | date: 'mediumDate'}}</td>
-                    </tr>
-                    <p class="text-center mt-3" *ngIf="(myRecentTransactions$ | async)?.length === 0">No recent
-                        transactions</p>
-                </tbody>
-            </table>
+            <div class="pt-2" *ngFor="let transaction of (myRecentTransactions$ | async)">
+                <div class="card shadow-sm send-transaction mb-2" style="width: 100%;" *ngIf="transaction?.type === 'send'">
+                    <div class="card-body">
+                        <div class="transaction-detail">
+                            <div>
+                                <p class="text-bold">{{transaction?.receiver?.first_name}} {{transaction?.receiver?.last_name}}</p>
+                                <p>{{transaction?.receiver?.phone_number}}</p>
+                            </div>
+                            <div class="text-end">
+                                <p>- {{transaction?.amount | currency: 'Ksh '}}</p>
+                                <p>{{transaction?.createdAt | date: 'medium'}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card shadow-sm topup-transaction mb-2" style="width: 100%;" *ngIf="transaction?.type === 'topUp'">
+                    <div class="card-body">
+                        <div class="transaction-detail">
+                            <div>
+                                <p class="text-bold">{{transaction?.user?.first_name}} {{transaction?.user?.last_name}}</p>
+                                <p>{{transaction?.user?.phone_number}}</p>
+                            </div>
+                            <div class="text-end">
+                                <p>+ {{transaction?.amount | currency: 'Ksh '}}</p>
+                                <p>{{transaction?.createdAt | date: 'medium'}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card shadow-sm receive-transaction mb-2" style="width: 100%;" *ngIf="transaction?.type === 'receive'">
+                    <div class="card-body">
+                        <div class="transaction-detail">
+                            <div>
+                                <p class="text-bold">{{transaction?.sender?.first_name}} {{transaction?.sender?.last_name}}</p>
+                                <p>{{transaction?.sender?.phone_number}}</p>
+                            </div>
+                            <div class="text-end">
+                                <p>+ {{transaction?.amount | currency: 'Ksh '}}</p>
+                                <p>{{transaction?.createdAt | date: 'medium'}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>

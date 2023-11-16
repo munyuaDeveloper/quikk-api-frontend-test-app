@@ -4,7 +4,7 @@ import { NavbarComponent } from "../shared/navbar/navbar.component";
 import { SharedService } from '../shared/services/shared.service';
 import { Observable, lastValueFrom, map, take } from 'rxjs';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { IFormField } from '../shared/interfaces';
+import { IFormField, ITransaction } from '../shared/interfaces';
 import { formFields } from '../shared/form-fields';
 import { DialogFormComponent } from '../shared/dialog-form/dialog-form.component';
 
@@ -17,7 +17,7 @@ import { DialogFormComponent } from '../shared/dialog-form/dialog-form.component
 })
 export class DashboardComponent implements OnInit {
 
-    myRecentTransactions$!: Observable<any>;
+    myRecentTransactions$!: Observable<ITransaction[]>;
     accountBalance$!: Observable<any>;
     profileDetails: any;
 
