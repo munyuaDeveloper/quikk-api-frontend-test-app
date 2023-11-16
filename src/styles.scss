@@ -17,11 +17,21 @@ a{
     cursor: pointer;
 }
 a:hover {
-    color: #F6F7D4 !important;
+    // padding: 2px;
+    font-size: 18px;
 }
 .card{
     border: none;
 }
 .text-primary{
     color: #28DF99 !important; 
+}
+.btn-outline-primary{
+    border: 1px solid #000;
+    padding: 10px 30px;
+}
+.btn-outline-primary:hover{
+    border: 1px solid #000;
+    background-color: #99F3BD;
+    padding: 12px 35px;
 }
